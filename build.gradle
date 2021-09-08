@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+group 'org.distributedlock'
+version '0.1.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+project.ext {
+    lombokVersion = "1.18.20"
+    slf4jVersion = "1.7.32"
+    springVersion = "5.3.9"
+    commonsLang3Version = "3.12.0"
+    aspectjVersion = "1.9.7"
+    jacksonVersion = "2.12.5"
+    jupiterVersion = "5.7.2"
+}
+
+dependencies {
+    // lombok only used for compilation and will not be a runtime dependency
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+    implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
+    implementation "org.springframework:spring-core:${springVersion}"
+    implementation "org.springframework:spring-beans:${springVersion}"
+    implementation "org.springframework:spring-context:${springVersion}"
+    implementation "org.springframework:spring-aop:${springVersion}"
+    implementation "org.aspectj:aspectjtools:${aspectjVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jupiterVersion}"
+}
+
+test {
+    useJUnitPlatform()
+}
